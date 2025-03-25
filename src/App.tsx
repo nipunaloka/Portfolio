@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import portfolioImage from "./image/portfolio.png";
 import {
   Github,
