@@ -498,7 +498,7 @@ const scaleIn = {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed w-full bg-gray-900/95 backdrop-blur-sm z-50 border-b border-gray-800"
+        className="fixed w-full glass backdrop-blur-md z-50 border-b border-gray-700/50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -508,31 +508,39 @@ const scaleIn = {
               transition={{ delay: 0.2 }}
               className="flex-shrink-0"
             >
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-                Nipun Bandara
-              </span>
+              <motion.span 
+                whileHover={{ scale: 1.05 }}
+                className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
+              >
+                NB
+              </motion.span>
             </motion.div>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {navLinks.map(({ id, label }, index) => (
+            <div className="hidden md:flex items-center space-x-1">
+              {navLinks.map(({ id, label, icon: Icon }, index) => (
                 <motion.button
                   key={id}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index }}
                   onClick={() => scrollToSection(id)}
-                  className={`text-sm transition-colors relative ${
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`relative px-4 py-2 rounded-lg transition-all ${
                     activeSection === id
-                      ? 'text-blue-500'
-                      : 'text-gray-300 hover:text-white'
+                      ? 'text-white'
+                      : 'text-gray-400 hover:text-white'
                   }`}
                 >
-                  {label}
+                  <div className="flex items-center gap-2">
+                    <Icon size={16} />
+                    <span className="text-sm font-medium">{label}</span>
+                  </div>
                   {activeSection === id && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-500"
+                      className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-lg border border-blue-500/30"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -545,7 +553,7 @@ const scaleIn = {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-300 hover:text-white"
+                className="p-2 rounded-lg glass-card text-gray-300 hover:text-white transition-colors"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </motion.button>
@@ -559,7 +567,7 @@ const scaleIn = {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-gray-900 border-b border-gray-800"
+            className="md:hidden glass border-t border-gray-700/50"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navLinks.map(({ id, label, icon: Icon }, index) => (
@@ -569,14 +577,16 @@ const scaleIn = {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 * index }}
                   onClick={() => scrollToSection(id)}
-                  className={`w-full flex items-center px-3 py-2 rounded-md text-base ${
+                  whileHover={{ x: 5 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                     activeSection === id
-                      ? 'bg-gray-800 text-blue-500'
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                      ? 'glass-card border border-blue-500/30 text-white'
+                      : 'text-gray-400 hover:glass-card hover:text-white'
                   }`}
                 >
-                  <Icon size={18} className="mr-2" />
-                  {label}
+                  <Icon size={18} />
+                  <span className="font-medium">{label}</span>
                 </motion.button>
               ))}
             </div>
@@ -585,20 +595,40 @@ const scaleIn = {
       </motion.nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-16">
-        <div className="max-w-4xl mx-auto text-center">
+      <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-16 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+
+        <div className="max-w-5xl mx-auto text-center relative z-10">
           <motion.div 
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, type: "spring" }}
-            className="mb-8"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
+            className="mb-8 relative"
           >
+            <motion.div
+            animate={{
+              x: [0, 100, 0],
+              y: [0, -100, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20"
+          />
+          
             <motion.img
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileHover={{ scale: 1.05, rotate: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
               src={portfolioImage}
               alt="Profile"
-              className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-500/20"
+              className="relative w-40 h-40 rounded-full mx-auto border-4 border-blue-500/30 shadow-2xl shadow-blue-500/20"
             />
           </motion.div>
           
@@ -606,9 +636,9 @@ const scaleIn = {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold mb-6"
+            className="text-5xl md:text-7xl font-bold mb-6"
           >
-            <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               <TypeAnimation
                 sequence={[
                   "Hi, I'm Nipun Bandara",
@@ -626,38 +656,44 @@ const scaleIn = {
             </span>
           </motion.h1>
           
-          <motion.p 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-xl md:text-2xl text-gray-400 mb-8"
+            className="mb-8"
           >
-            <TypeAnimation
-              sequence={[
-                1000, // Wait 1 second
-                'Full-Stack Developer',
-                2000,
-                'AI & Machine Learning Developer',
-                2000,
-                'Mobile & Backend Developer',
-                2000,
-                'IoT & Embedded Systems Developer',
-                2000,
-                'Cloud & Database Solutions Developer',
-                2000,
-              ]}
-              wrapper="p"
-              speed={50}
-              repeat={Infinity}
-              cursor={true}
-            />
-          </motion.p>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="inline-block glass-card rounded-2xl px-8 py-4 border border-gray-700"
+            >
+              <TypeAnimation
+                sequence={[
+                  1000,
+                  'Full-Stack Developer',
+                  2000,
+                  'AI & Machine Learning Developer',
+                  2000,
+                  'Mobile & Backend Developer',
+                  2000,
+                  'IoT & Embedded Systems Developer',
+                  2000,
+                  'Cloud & Database Solutions Developer',
+                  2000,
+                ]}
+                wrapper="p"
+                className="text-xl md:text-2xl text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text font-semibold"
+                speed={50}
+                repeat={Infinity}
+                cursor={true}
+              />
+            </motion.div>
+          </motion.div>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-gray-400 max-w-2xl mx-auto mb-12"
+            className="text-gray-400 text-lg max-w-3xl mx-auto mb-12 leading-relaxed"
           >
             Specializing in building exceptional digital experiences with modern technologies.
             From complex enterprise solutions to innovative AI applications.
@@ -670,20 +706,28 @@ const scaleIn = {
             className="flex flex-wrap justify-center gap-4 mb-12"
           >
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(59, 130, 246, 0.5)" }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection('projects')}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center"
+              className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-semibold shadow-lg overflow-hidden"
             >
-              View My Work <ChevronRight size={20} className="ml-2" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <span className="relative flex items-center gap-2">
+                View My Work 
+                <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </span>
             </motion.button>
+            
             <motion.button
-              whileHover={{ scale: 1.05, borderColor: "#3b82f6" }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection('contact')}
-              className="px-6 py-3 border border-gray-700 hover:border-blue-500 rounded-lg flex items-center"
+              className="group px-8 py-4 glass-card border border-gray-700 hover:border-blue-500 rounded-xl font-semibold transition-all"
             >
-              Contact Me <Mail size={20} className="ml-2" />
+              <span className="flex items-center gap-2">
+                Contact Me 
+                <Mail size={20} className="group-hover:rotate-12 transition-transform" />
+              </span>
             </motion.button>
           </motion.div>
           
@@ -694,24 +738,63 @@ const scaleIn = {
             className="flex justify-center gap-6"
           >
             {[
-              { href: "https://github.com/nipunaloka", icon: Github },
-              { href: "https://www.linkedin.com/in/nipun-bandara-b28a93201", icon: Linkedin },
-              { href: "mailto:nipunaloka489@gmail.com", icon: Mail }
-            ].map(({ href, icon: Icon }, index) => (
+              { href: "https://github.com/nipunaloka", icon: Github, color: "hover:text-gray-400" },
+              { href: "https://www.linkedin.com/in/nipun-bandara-b28a93201", icon: Linkedin, color: "hover:text-blue-400" },
+              { href: "mailto:nipunaloka489@gmail.com", icon: Mail, color: "hover:text-red-400" }
+            ].map(({ href, icon: Icon, color }, index) => (
               <motion.a
                 key={href}
                 href={href}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
-                whileHover={{ scale: 1.2, color: "#3b82f6" }}
-                className="text-gray-400 hover:text-white transition-colors"
+                whileHover={{ scale: 1.2, y: -5 }}
+                whileTap={{ scale: 0.9 }}
+                className={`p-4 glass-card rounded-xl text-gray-400 ${color} transition-all border border-gray-700 hover:border-blue-500`}
                 target={href.startsWith('http') ? "_blank" : undefined}
                 rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
               >
                 <Icon size={24} />
               </motion.a>
             ))}
+          </motion.div>
+
+          {/* Floating skill badges */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-16 flex flex-wrap justify-center gap-3"
+          >
+            {['React', 'Node.js', 'Python', 'AI/ML', 'IoT', 'Cloud'].map((skill, index) => (
+              <motion.div
+                key={skill}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.9 + index * 0.1 }}
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="px-4 py-2 glass-card rounded-full text-sm font-medium text-blue-400 border border-blue-500/30"
+              >
+                {skill}
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="flex flex-col items-center gap-2 text-gray-400"
+            >
+              <span className="text-xs">Scroll to explore</span>
+              <ChevronRight size={20} className="rotate-90" />
+            </motion.div>
           </motion.div>
         </div>
       </section>
