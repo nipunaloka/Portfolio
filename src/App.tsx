@@ -9,7 +9,6 @@ import {
   ExternalLink,
   Menu,
   X,
-  Download,
   ChevronRight,
   ChevronLeft,
   Database,
@@ -23,7 +22,6 @@ import {
   Code,
   Briefcase,
   AirVent,
-  Clipboard,
   Smartphone,
   Bot,
   Wifi,
@@ -42,7 +40,6 @@ import {
   AlertCircle,
   Loader,
   Phone,
-  MapPin
 } from 'lucide-react';
 
 function Counter({ end, duration = 2, suffix = '' }: { end: number; duration?: number; suffix?: string }) {
@@ -124,51 +121,51 @@ function App() {
 
   // Animation Variants
   const fadeInUp = {
-    hidden: { opacity: 0, y: 60 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
-  };
+  hidden: { opacity: 0, y: 60 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6}
+  }
+};
 
-  const fadeInLeft = {
-    hidden: { opacity: 0, x: -60 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
-  };
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.6 }
+  }
+};
 
-  const fadeInRight = {
-    hidden: { opacity: 0, x: 60 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
-  };
+const fadeInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.6}
+  }
+};
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3
     }
-  };
+  }
+};
 
-  const scaleIn = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: { 
-      scale: 1, 
-      opacity: 1,
-      transition: { duration: 0.5 }
-    }
-  };
+const scaleIn = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: { 
+    scale: 1, 
+    opacity: 1,
+    transition: { duration: 0.5}
+  }
+};
 
   const navLinks = [
     { id: 'home', label: 'Home', icon: User },
@@ -1523,7 +1520,7 @@ function App() {
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
           >
-            {achievements.map((stat, index) => (
+            {achievements.map((stat, _index) => (
               <motion.div
                 key={stat.label}
                 variants={scaleIn}
@@ -1726,7 +1723,7 @@ function App() {
             variants={staggerContainer}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {services.map((service, index) => (
+            {services.map((service, _index) => (
               <motion.div
                 key={service.title}
                 variants={scaleIn}
