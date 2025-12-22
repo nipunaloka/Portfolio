@@ -9,7 +9,7 @@ export default defineConfig(({ command }) => {
     optimizeDeps: {
       exclude: ['lucide-react'],
     },
-    base: command === 'build' ? '/Portfolio/' : '/',
+    base: '/',
     build: {
       outDir: 'dist',
       assetsDir: 'assets',
