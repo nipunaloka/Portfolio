@@ -652,7 +652,7 @@ const scaleIn = {
               transition={{ type: "spring", stiffness: 300 }}
               src={portfolioImage}
               alt="Profile"
-              className="relative w-40 h-40 rounded-full mx-auto border-4 border-blue-500/30 shadow-2xl shadow-blue-500/20"
+              className="relative w-40 h-40 rounded-full  mt-5 mx-auto border-4 border-blue-500/30 shadow-2xl shadow-blue-500/20"
             />
           </motion.div>
           
