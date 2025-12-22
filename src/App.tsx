@@ -462,6 +462,31 @@ const scaleIn = {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       <style>{`
+        /* Deployment fixes for GitHub Pages */
+        html {
+          -webkit-text-size-adjust: none !important;
+          -moz-text-size-adjust: none !important;
+          -ms-text-size-adjust: none !important;
+          text-size-adjust: none !important;
+        }
+        
+        body {
+          -webkit-text-size-adjust: none !important;
+          text-size-adjust: none !important;
+          transform: scale(1) !important;
+          transform-origin: 0 0 !important;
+        }
+        
+        #root {
+          -webkit-text-size-adjust: none !important;
+          text-size-adjust: none !important;
+        }
+        
+        * {
+          -webkit-text-size-adjust: none !important;
+          text-size-adjust: none !important;
+        }
+
         .glass {
           background: rgba(17, 25, 40, 0.75);
           backdrop-filter: blur(16px) saturate(180%);
@@ -489,7 +514,7 @@ const scaleIn = {
       `}</style>
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-blue-500 origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform origin-left z-50"
         style={{ scaleX }}
       />
 
@@ -622,7 +647,6 @@ const scaleIn = {
             }}
             className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20"
           />
-          
             <motion.img
               whileHover={{ scale: 1.05, rotate: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
