@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/Portfolio/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="description" content="Nipun Bandara - Full-Stack Developer specializing in MERN stack, AI/ML, IoT, and Cloud solutions" />
     <meta name="keywords" content="Full-Stack Developer, MERN Stack, React, Node.js, AI/ML, IoT, Cloud Computing" />
     <meta name="author" content="Nipun Bandara" />
@@ -18,11 +18,30 @@
     <meta name="twitter:title" content="Nipun Bandara - Full-Stack Developer Portfolio" />
     <meta name="twitter:description" content="Showcasing my expertise in Full-Stack Development, AI/ML, and IoT Solutions" />
     
+    <!-- Prevent zoom issues -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
     <title>Nipun Bandara - Full-Stack Developer</title>
-    <script type="module" crossorigin src="/Portfolio/assets/index-DnrgFR6V.js"></script>
-    <link rel="modulepreload" crossorigin href="/Portfolio/assets/vendor-DbHEDQBy.js">
-    <link rel="modulepreload" crossorigin href="/Portfolio/assets/motion-fAeH9RPO.js">
-    <link rel="stylesheet" crossorigin href="/Portfolio/assets/index-kMT7Wspi.css">
+    
+    <style>
+      /* Prevent FOUC (Flash of Unstyled Content) */
+      body {
+        opacity: 0;
+        animation: fadeIn 0.3s ease-in forwards;
+      }
+      
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BJAkB5qu.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-DbHEDQBy.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-fAeH9RPO.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DE1PbLp6.css">
   </head>
   <body>
     <div id="root"></div>
