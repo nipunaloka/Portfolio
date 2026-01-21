@@ -250,7 +250,7 @@ const scaleIn = {
       title: 'Task Management Web App (React, Node.js, MongoDB)',
       description: 'A full-stack Task Management Web Application built with modern technologies including React, Node.js, and MongoDB. Users can log in with Google, manage tasks, and export data as PDFs.',
       tech: ['React', 'Node.js', 'MongoDB', 'Google OAuth', 'PDF Export'],
-      image: 'https://images.unsplash.com/photo-1612831455540-7b47c5f13e07?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+      image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     }
   ];
 
